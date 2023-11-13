@@ -8,6 +8,20 @@ import Island from "../components/models/Island";
       </div> */
 }
 const Home = () => {
+  const adjustIslandForScreen = () => {
+    let screenScale = null;
+    let screenPositions = [0, -6.5, -43];
+    let rotation = [0.1, 4.7, 0];
+
+    if (window.innerWidth < 768) {
+      screenScale = [0.9, 0.9, 0.9];
+    } else {
+      screenScale = [1, 1, 1];
+    }
+
+    return [screenScale, screenPositions, rotation];
+  };
+  const [islandScale, IslandPosition, islandRotation] = adjustIslandForScreen();
   return (
     <section className="w-full h-screen relative">
       <Canvas
@@ -15,12 +29,16 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
-          <directionalLight />
+          <directionalLight position={[1, 1, 1]} intensity={2} />
           <ambientLight />
           <pointLight />
           <spotLight />
           <hemisphereLight />
-          <Island />
+          <Island
+            position={IslandPosition}
+            scale={islandScale}
+            rotation={islandRotation}
+          />
         </Suspense>
       </Canvas>
     </section>
