@@ -14,7 +14,7 @@ const Home = () => {
   const [isrotating, setIsrotating] = useState(false);
   const adjustIslandForScreen = () => {
     let screenScale = null;
-    let screenPositions = [0, -6.5, -43];
+    let screenPosition = [0, -6.5, -43];
     let rotation = [0.1, 4.7, 0];
 
     if (window.innerWidth < 768) {
@@ -22,10 +22,26 @@ const Home = () => {
     } else {
       screenScale = [1, 1, 1];
     }
-
-    return [screenScale, screenPositions, rotation];
+    return [screenScale, screenPosition, rotation];
   };
-  const [islandScale, IslandPosition, islandRotation] = adjustIslandForScreen();
+  const [islandScale, islandPosition, islandRotation] = adjustIslandForScreen();
+
+  const adjustPlaneForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    // let rotation = [0.1, 4.7, 0];
+
+    if (window.innerWidth < 768) {
+      screenScale = [1.5, 1.5, 1.5];
+      screenPosition = [0, 1.5, 0];
+    } else {
+      screenScale = [3, 3, 3];
+      screenPosition = [0, 0, -4];
+    }
+
+    return [screenScale, screenPosition];
+  };
+  const [planeScale, planePositions] = adjustPlaneForScreenSize();
   return (
     <section className="w-full h-screen relative">
       <Canvas
@@ -45,11 +61,17 @@ const Home = () => {
           <Bird />
           <Sky />
           <Island
-            position={IslandPosition}
+            position={islandPosition}
             scale={islandScale}
             rotation={islandRotation}
+            setIsrotating={islandRotation}
           />
-          <Plane />
+          <Plane
+            isRotating={isrotating}
+            planeScale={planeScale}
+            planePositions={planePositions}
+            rotation={[0, 20, 0]}
+          />
         </Suspense>
       </Canvas>
     </section>
