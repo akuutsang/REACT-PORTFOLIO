@@ -4,7 +4,7 @@ import { Loader } from "../components/Loader";
 import Island from "../components/models/Island";
 import Sky from "../components/models/Sky";
 import Bird from "../components/models/Bird";
-import { Plane } from "../components/models/Plane";
+import Plane from "../components/models/Plane";
 {
   /* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center ">
         testing
