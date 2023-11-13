@@ -29,14 +29,13 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
-          <directionalLight position={[10, 1, 1]} intensity={1} />
+          <directionalLight position={[1, 10, 1]} intensity={1} />
           <ambientLight intensity={0.5} />
-          {/* <pointLight /> */}
-          {/* <spotLight /> */}
-          {/* because my theme is an outside scene
-          i dont need to caste light on a particular spot hence no need for 
-          pointLight and spotLight */}
-          <hemisphereLight />
+          <hemisphereLight
+            skyColor="#b1e1ff"
+            groundColor="#000000"
+            intensity={1.5}
+          />
           <Island
             position={IslandPosition}
             scale={islandScale}
