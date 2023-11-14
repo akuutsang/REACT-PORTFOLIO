@@ -1,8 +1,8 @@
-import { a } from "@react-spring/three";
-import { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import islandScene from "../../assets/3d/island.glb";
+import { a } from "@react-spring/three";
 
 export function Island({
   isRotating,
@@ -71,7 +71,7 @@ export function Island({
     const canvas = gl.domElement;
     canvas.addEventListener("pointerdown", handlePointerDown);
     canvas.addEventListener("pointerup", handlePointerUp);
-    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerdown", handlePointerMove);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
