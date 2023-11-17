@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { arrow } from "../assets/icons";
 
 const InfoBox = ({ text, link, btnText }) => (
-  <div className="sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-4 text-white mx-5 flex flex-col ">
-    {text}
-    <Link className="bg-amber-300 w-1/2 self-center" to={link}>
+  <div className="info-box ">
+    <p className="font-medium sm:text-x1 text-center">{text}</p>
+    <Link to={link} className="neo-brutalism-white neo-btn">
       {btnText}
+      <img src={arrow} className="w-4 h-4 object-contain" />
     </Link>
   </div>
 );
@@ -34,7 +36,7 @@ const renderContent = {
   3: (
     <InfoBox
       text="Here are some of my past projects"
-      link="/skills"
+      link="/projects"
       btnText="View"
     />
   ),
