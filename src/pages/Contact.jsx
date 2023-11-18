@@ -2,9 +2,12 @@ import phone from "/images/phoneIcon.jpeg";
 import email from "/images/emailIcon.jpeg";
 import home from "/images/locationIcon.png";
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRef } from "react";
 import { useContext } from "react";
+import { Canvas } from "@react-three/fiber";
+import Fox from "../components/models/Fox";
+import { Loader } from "../components/Loader";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -77,7 +80,7 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className="text-black-500 font-semibold">
+          <label className="text-black-500 font-semibold ">
             Message
             <textarea
               type="text"
@@ -102,6 +105,26 @@ const Contact = () => {
             {isLoading ? "sending..." : "Send Message"}
           </button>
         </form>
+      </div>
+      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
+        <Canvas
+          camera={{
+            position: [0, 0, 5],
+            fov: 75,
+            near: 0.1,
+            far: 1000,
+          }}
+        >
+          <directionalLight position={[0, 0, 1]} intensity={2.5} />
+          <ambientLight intensity={0.5} />
+          <Suspense fallback={<Loader />}>
+            <Fox
+              position={[0.5, 0.35, 0]}
+              rotation={[12, 6, 0]}
+              scale={[1, 1, 1]}
+            />
+          </Suspense>
+        </Canvas>
       </div>
     </section>
   );
