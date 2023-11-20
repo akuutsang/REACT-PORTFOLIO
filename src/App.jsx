@@ -1,20 +1,17 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import { Home, About, Contact, Projects } from "./pages";
+// import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Canvas } from "react-three-fiber";
+import { Experience } from "./components/Experience";
 
 const App = () => {
   return (
-    <main className="bg-s;-300/20">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Router>
-    </main>
+    <Canvas
+      style={{ height: "100vh" }}
+      shadows
+      camera={{ position: [0, 2, 5], fov: 30 }}
+    >
+      <color attach="background" args={["#ececec"]} />
+      <Experience />
+    </Canvas>
   );
 };
 
