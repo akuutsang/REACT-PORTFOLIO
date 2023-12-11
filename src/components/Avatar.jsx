@@ -1,7 +1,6 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
-import { useEffect } from "react";
-import { useFrame } from "react-three-fiber";
+import { useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import * as THREE from "three";
 
@@ -36,7 +35,7 @@ export function Avatar(props) {
   );
 
   useFrame((state) => {
-    if (headFollow === true) {
+    if (headFollow) {
       groupRef.current.getObjectByName("Head").lookAt(state.camera.position);
     }
     if (cursorFollow) {
@@ -46,11 +45,16 @@ export function Avatar(props) {
   });
 
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
-    return () => {
-      actions[animation].reset().fadeOut(0.5);
+    const handleAnimationChange = () => {
+      actions[animation].reset().fadeIn(0.005).play();
     };
-  }, [animation]);
+
+    handleAnimationChange();
+
+    return () => {
+      actions[animation].fadeOut(1).reset();
+    };
+  }, [animation, actions]);
 
   useEffect(() => {
     Object.values(materials).forEach((material) => {
